@@ -1,4 +1,4 @@
-# eye-hospital-management
+# Eye Hospital Management
+  A Java Web Application for managing an eye hospital
+  
 #
-# Third Year of Engineering
-# Web Technology Lab Project
