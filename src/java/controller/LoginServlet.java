@@ -7,10 +7,13 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.crce.wtlabs.dto.User;
+import org.crce.wtlabs.impl.UserDaoImpl;
 
 /**
  *
@@ -31,8 +34,23 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
             System.out.println("..Login Servlet");
+            
+            User user = new User();
+            user.setName(request.getParameter("email"));
+            user.setPassword(request.getParameter("password"));
+            
+            UserDaoImpl userDaoImpl = new UserDaoImpl();
+            
+            if(userDaoImpl.isValid(user)) {
+                user.setType(userDaoImpl.getUserType(user));
+                request.getSession().setAttribute("user", user);
+                response.sendRedirect("/");
+            } 
+            else {
+                RequestDispatcher view = request.getRequestDispatcher("register.jsp");
+                view.forward(request, response);
+            }
             
         }
     }
