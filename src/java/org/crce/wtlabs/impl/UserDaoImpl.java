@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String query = "SELECT * FROM USER WHERE USERNAME = ?";  
+        String query = "SELECT * FROM HR.USERS WHERE USERNAME = ?";  
         
         try {
             preparedStatement = conn.prepareStatement(query);
@@ -67,7 +67,7 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String query = "SELECT * FROM USER WHERE USERNAME = ?";
+        String query = "SELECT * FROM HR.USERS WHERE USERNAME = ?";
         
         try {
             preparedStatement = conn.prepareStatement(query);

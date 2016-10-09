@@ -5,6 +5,8 @@
  */
 package org.crce.wtlabs.dto;
 
+import org.crce.wtlabs.impl.PatientDaoImpl;
+
 /**
  *
  * @author Flav
@@ -12,7 +14,7 @@ package org.crce.wtlabs.dto;
 public class Patient {
     
     private int id;
-    private String name;
+    private String name, email, contact;
 
     public int getId() {
         return id;
@@ -29,5 +31,25 @@ public class Patient {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
     
+    public void setInfo(User u) {
+        PatientDaoImpl pDaoImpl = new PatientDaoImpl();
+        pDaoImpl.setInfo(this, u);
+    }
 }

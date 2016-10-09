@@ -15,14 +15,14 @@ import java.sql.SQLException;
  */
 public class DataSource {
     private static Connection conn;
-    private static String url = "jdbc:oracle:thin:@//localhost:1521";
-    private static String username = "admin";
-    private static String password = "admin";
-    private static String driver = "oracle.jdbc.driver.OracleDriver";
+    private static String host = "jdbc:postgresql://localhost:5432/HR";
+    private static String username = "postgres";
+    private static String password = "pass";
+    private static String driver = "org.postgresql.Driver";
     
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
-        conn = DriverManager.getConnection(url, username, password);
+        conn = DriverManager.getConnection(host, username, password);
         return conn;
     }
 }

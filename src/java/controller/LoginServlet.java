@@ -43,12 +43,19 @@ public class LoginServlet extends HttpServlet {
             UserDaoImpl userDaoImpl = new UserDaoImpl();
             
             if(userDaoImpl.isValid(user)) {
-                user.setType(userDaoImpl.getUserType(user));
+                int type = userDaoImpl.getUserType(user);
+                user.setType(type);
                 request.getSession().setAttribute("user", user);
-                response.sendRedirect("/");
-            } 
+                switch(type) {
+                    case 0 :    response.sendRedirect("JSP/admin.jsp");
+                                break;
+                    case 1 :    response.sendRedirect("JSP/doctor.jsp");
+                                break;
+                    default :   response.sendRedirect("JSP/patient.jsp");              
+                }
+            }
             else {
-                RequestDispatcher view = request.getRequestDispatcher("register.jsp");
+                RequestDispatcher view = request.getRequestDispatcher("register.html");
                 view.forward(request, response);
             }
             

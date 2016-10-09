@@ -6,6 +6,7 @@
 package org.crce.wtlabs.dao;
 
 import org.crce.wtlabs.dto.Patient;
+import org.crce.wtlabs.dto.User;
 
 /**
  *
@@ -15,5 +16,6 @@ public interface PatientDao {
     
     public void addPatient(Patient p);
     public int removePatient(Patient p);
+    public void setInfo(Patient p, User u);
     
 }
