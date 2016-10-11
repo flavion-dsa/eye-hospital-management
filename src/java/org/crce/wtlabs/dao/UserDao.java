@@ -16,4 +16,7 @@ public interface UserDao {
     
     public boolean isValid(User user);
     public int getUserType(User user);
+    public void addUser(User user);
+    public void updateUser(User user);
+    public void updatePassword(User user);
 }

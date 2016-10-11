@@ -7,19 +7,19 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.crce.wtlabs.dto.Patient;
 import org.crce.wtlabs.dto.User;
-import org.crce.wtlabs.impl.UserDaoImpl;
+import org.crce.wtlabs.impl.PatientDaoImpl;
 
 /**
  *
  * @author Flav
  */
-public class LoginServlet extends HttpServlet {
+public class VerifyServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,33 +34,27 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("..Login Servlet");
+            /* TODO output your page here. You may use following sample code. */
             
-            User user = new User();
-            user.setName(request.getParameter("email"));
-            user.setPassword(request.getParameter("password"));
+            int vcode = (int) getServletContext().getAttribute("vcode");
+            User u = (User) getServletContext().getAttribute("user");
+            Patient p = (Patient) getServletContext().getAttribute("patient");
+            int passcode = Integer.parseInt(request.getParameter("passcode"));
             
-            UserDaoImpl userDaoImpl = new UserDaoImpl();
-            
-            if(userDaoImpl.isValid(user)) {
-                int type = userDaoImpl.getUserType(user);
-                RequestDispatcher view = null;
-                user.setType(type);
-                request.getSession().setAttribute("user", user);
-                switch(type) {
-                    case 0 :    view = request.getRequestDispatcher("JSP/admin.jsp");
-                                break;
-                    case 1 :    view = request.getRequestDispatcher("JSP/patient.jsp");
-                                break;
-                    case 2 :    view = request.getRequestDispatcher("JSP/doctor.jsp");
-                                break;
-                }
-                view.forward(request, response);
-            }
-            else {
+            if(vcode == passcode) {
+                PatientDaoImpl pDaoImpl = new PatientDaoImpl();
+                pDaoImpl.updateUser(u);
+                pDaoImpl.addPatient(p);
+                
+                getServletContext().setAttribute("vcode", null);
+                getServletContext().setAttribute("user", null);
+                getServletContext().setAttribute("patient", null);
+                
                 response.sendRedirect("index.html");
+                
+            } else {
+                response.sendRedirect("JSP/verify.jsp");
             }
-            
         }
     }
 

@@ -10,7 +10,7 @@ package org.crce.wtlabs.dto;
  * @author Flav
  */
 public class User {
-    private int type;
+    private int type, vcode;
     private String name, password;
 
     public int getType() {
@@ -35,6 +35,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getVcode() {
+        return vcode;
+    }
+
+    public void setVcode(int vcode) {
+        this.vcode = vcode;
     }
     
 }

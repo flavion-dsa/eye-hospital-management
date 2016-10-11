@@ -7,19 +7,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.crce.wtlabs.dto.User;
-import org.crce.wtlabs.impl.UserDaoImpl;
 
 /**
  *
  * @author Flav
  */
-public class LoginServlet extends HttpServlet {
+public class LogOutServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,33 +31,9 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("..Login Servlet");
-            
-            User user = new User();
-            user.setName(request.getParameter("email"));
-            user.setPassword(request.getParameter("password"));
-            
-            UserDaoImpl userDaoImpl = new UserDaoImpl();
-            
-            if(userDaoImpl.isValid(user)) {
-                int type = userDaoImpl.getUserType(user);
-                RequestDispatcher view = null;
-                user.setType(type);
-                request.getSession().setAttribute("user", user);
-                switch(type) {
-                    case 0 :    view = request.getRequestDispatcher("JSP/admin.jsp");
-                                break;
-                    case 1 :    view = request.getRequestDispatcher("JSP/patient.jsp");
-                                break;
-                    case 2 :    view = request.getRequestDispatcher("JSP/doctor.jsp");
-                                break;
-                }
-                view.forward(request, response);
-            }
-            else {
-                response.sendRedirect("index.html");
-            }
-            
+            /* TODO output your page here. You may use following sample code. */
+            request.getSession().setAttribute("user", null);
+            response.sendRedirect("index.html");
         }
     }
 

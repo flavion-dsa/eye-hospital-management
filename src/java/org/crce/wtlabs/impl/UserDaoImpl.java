@@ -50,6 +50,8 @@ public class UserDaoImpl implements UserDao {
                 }
             }
             
+            conn.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,11 +81,68 @@ public class UserDaoImpl implements UserDao {
                 type = result.getInt("USER_TYPE");
             }
             
+            conn.close();
+            
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return type;
     }
-    
+
+    @Override
+    public void addUser(User user) {
+        
+        try {
+            conn = DataSource.getConnection();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String query = "INSERT INTO HR.USERS VALUES (?,?,?,?,?)";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setInt(3, user.getVcode());
+            preparedStatement.setInt(4, 0);
+            preparedStatement.setInt(5, user.getType());
+            
+            preparedStatement.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void updatePassword(User user) {
+        
+    }
+
+    @Override
+    public void updateUser(User user) {
+        
+        try {
+            conn = DataSource.getConnection();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String query = "UPDATE HR.USERS SET VERIFIED = 1 WHERE USERNAME = ?";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.executeUpdate();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

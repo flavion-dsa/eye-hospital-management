@@ -80,40 +80,39 @@ and open the template in the editor.
     </head>
     <body>
         <div class="pusher">
-              
-                <div class="ui middle aligned center aligned grid" style="margin-top: 120px">
-                  <div class="column">
-                      <h2 class="ui inverted header">
-                          <div class="content">
-                              Log-in to your account
-                          </div>
-                      </h2>
-                      <form class="ui form" action="LoginServlet.do" method="post">
-                          <div class="ui stacked segment">
-                              <div class="field">
-                                  <div class="ui left icon input">
-                                      <i class="user icon"></i>
-                                      <input type="text" name="email" placeholder="E-mail address">
-                                  </div>
-                              </div>
-                              <div class="field">
-                                  <div class="ui left icon input">
-                                      <i class="lock icon"></i>
-                                      <input type="password" name="password" placeholder="Password">
-                                  </div>
-                              </div>
-                              <a href="">Forgot password ?</a>
-                              <br><br>
-                              <div class="ui fluid large blue submit button">Sign In</div>
-                          </div>
-                      </form>
-                      <div class="ui message">
-                          <h4>Don't have an account? Create it now!</h4>
-                          <button class="ui large orange fluid button"
-                                  onclick="window.location.href='register.html'">Sign Up</button>
+            <div class="ui middle aligned center aligned grid" style="margin-top: 120px">
+                <div class="column">
+                    <h2 class="ui inverted header">
+                      <div class="content">
+                          Log-in to your account
                       </div>
+                    </h2>
+                  <form class="ui form" action="LoginServlet.do" method="post">
+                      <div class="ui stacked segment">
+                          <div class="field">
+                              <div class="ui left icon input">
+                                  <i class="user icon"></i>
+                                  <input type="text" name="email" placeholder="E-mail address">
+                              </div>
+                          </div>
+                          <div class="field">
+                              <div class="ui left icon input">
+                                  <i class="lock icon"></i>
+                                  <input type="password" name="password" placeholder="Password">
+                              </div>
+                          </div>
+                          <a href="">Forgot password ?</a>
+                          <br><br>
+                          <div class="ui fluid large blue submit button">Sign In</div>
+                      </div>
+                  </form>
+                  <div class="ui message">
+                      <h4>Don't have an account? Create it now!</h4>
+                      <button class="ui large orange fluid button"
+                              onclick="window.location.href='register.html'">Sign Up</button>
                   </div>
                 </div>
-              </div>
+            </div>
+        </div>
     </body>
 </html>

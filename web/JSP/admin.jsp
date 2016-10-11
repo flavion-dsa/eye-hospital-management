@@ -1,6 +1,6 @@
 <%-- 
-    Document   : patient
-    Created on : Oct 9, 2016, 11:02:33 AM
+    Document   : admin
+    Created on : Oct 11, 2016, 2:01:43 PM
     Author     : Flav
 --%>
 
@@ -9,15 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Patient</title>
-        
+        <title>Admin</title>
+
         <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
-        
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/semantic/dist/semantic.min.js"></script>
-	<script src="bower_components/semantic/dist/components/sidebar.min.js"></script>
-	<script src="bower_components/semantic/dist/components/transition.min.js"></script>
-        
+
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/semantic/dist/semantic.min.js"></script>
+        <script src="bower_components/semantic/dist/components/sidebar.min.js"></script>
+        <script src="bower_components/semantic/dist/components/transition.min.js"></script>
+
         <style>
             .sidebar.menu {
                 width: 15% !important;
@@ -31,12 +31,12 @@
     <body>
         <div class="ui visible sidebar inverted vertical labeled icon borderless menu">
             <a class="item">
-                <i class="user icon"></i>
-                Patient
+                <i class="users icon"></i>
+                Patients
             </a>
             <a class="item">
-                <i class="treatment icon"></i>
-                Diagnosis
+                <i class="doctor icon"></i>
+                Doctors
             </a>
             <a class="item">
                 <i class="first aid icon"></i>

@@ -11,8 +11,7 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
-
-
+        
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/semantic/dist/semantic.min.js"></script>
 	<script src="bower_components/semantic/dist/components/sidebar.min.js"></script>
@@ -113,32 +112,10 @@ and open the template in the editor.
                                       prompt : 'Passwords do not match'
                                     }
                               ]
-                            },
-                            terms: {
-                              identifier  : 'terms',
-                              rules: [
-                                    {
-                                      type   : 'checked',
-                                      prompt : 'You must agree'
-                                    }
-                              ]
                             }
                     },
                     inline : true,
-                    on     : 'blur',
-                    onSuccess	:   function(event, fields) {
-                                        if($('.ui.form').form('is valid')){
-                                            $('.ui.modal')
-                                                .modal({
-                                                    closable	: false,
-                                                    onApprove	: function() {
-                                                                    $('.ui.modal').modal('hide');
-                                                                }
-                                                })
-                                                .modal('show');
-                                    }
-                                    event.preventDefault();
-                                    }
+                    on     : 'blur'
 		})
                 ;
 	
@@ -148,20 +125,9 @@ and open the template in the editor.
 	})
         ;
     </script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body>
-        <div class="ui modal">
-            <i class="close icon"></i>
-            <div class="header">
-                Success
-            </div>
-            <div class="content">
-                You have been registered
-            </div>
-            <div class="actions">
-                <div class="ui approve button">OK</div>
-            </div>
-        </div>
         <div class="pusher">
             <div class="ui middle aligned center aligned grid" style="margin-top: 120px">
                 <div class="column">
@@ -210,12 +176,10 @@ and open the template in the editor.
                                     <input type="password" name="confirm-password" placeholder="Confirm Password">
                                 </div>
                             </div>
-                            <div class="inline field">
-                                <div class="ui checkbox">
-                                    <input type="checkbox" name="terms" tabindex="0" class="hidden">
-                                    <label>I agree to terms and conditions</label>
-                                </div>
-                            </div>
+                            <div class="g-recaptcha" align="center"
+                                 data-sitekey="6Ldy2QgUAAAAAKlIbdfRRyZ7G8Y-IHITYy9CMrF-"
+                                 style="margin-bottom: 2em;"></div>
+     
                             <div class="ui fluid large blue submit button">Register</div>
                         </div>
                     </form>

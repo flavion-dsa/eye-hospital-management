@@ -14,7 +14,7 @@ import org.crce.wtlabs.impl.PatientDaoImpl;
 public class Patient {
     
     private int id;
-    private String name, email, contact;
+    private String firstName, lastName, email, contact, password;
 
     public int getId() {
         return id;
@@ -22,14 +22,6 @@ public class Patient {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEmail() {
@@ -47,9 +39,21 @@ public class Patient {
     public void setContact(String contact) {
         this.contact = contact;
     }
-    
-    public void setInfo(User u) {
-        PatientDaoImpl pDaoImpl = new PatientDaoImpl();
-        pDaoImpl.setInfo(this, u);
+
+    public String getFirstName() {
+        return firstName;
     }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
 }

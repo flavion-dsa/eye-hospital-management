@@ -21,7 +21,7 @@ import org.crce.wtlabs.util.DataSource;
  *
  * @author Flav
  */
-public class PatientDaoImpl implements PatientDao {
+public class PatientDaoImpl extends UserDaoImpl implements PatientDao {
 
     private Connection conn;
     private Statement statement;
@@ -37,16 +37,17 @@ public class PatientDaoImpl implements PatientDao {
             Logger.getLogger(PatientDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        String query = "INSERT INTO TABLE VALUES(?,?)";
+        String query = "INSERT INTO HR.PATIENTS VALUES(?,?,?,?)";
         
         try {
             
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, p.getId());
-            preparedStatement.setString(2, p.getName());
+            preparedStatement.setString(1, p.getEmail());
+            preparedStatement.setString(2, p.getFirstName());
+            preparedStatement.setString(3, p.getLastName());
+            preparedStatement.setString(4, p.getContact());
             
             preparedStatement.executeUpdate();
-            
             conn.close();
             
         } catch (SQLException ex) {
@@ -62,28 +63,4 @@ public class PatientDaoImpl implements PatientDao {
         return count;
     }
 
-    @Override
-    public void setInfo(Patient p, User u) {
-        
-        try {
-            conn = DataSource.getConnection();
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(PatientDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String query = "SELECT * FROM HR.USERS WHERE NAME = ?";
-        
-        try {
-            preparedStatement = conn.prepareStatement(query);
-            
-            preparedStatement.setString(1, u.getName());
-            result = preparedStatement.executeQuery();
-            
-            if(result.next()) {
-                p.setEmail(result.getString("NAME"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PatientDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
 }
