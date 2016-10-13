@@ -53,12 +53,12 @@ public class LoginServlet extends HttpServlet {
                     case 1 :    view = request.getRequestDispatcher("JSP/patient.jsp");
                                 break;
                     case 2 :    view = request.getRequestDispatcher("JSP/doctor.jsp");
-                                break;
                 }
                 view.forward(request, response);
             }
             else {
-                response.sendRedirect("index.html");
+                request.setAttribute("error", true);
+                response.sendRedirect("JSP/login.jsp");
             }
             
         }

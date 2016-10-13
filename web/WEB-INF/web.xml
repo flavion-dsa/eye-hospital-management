@@ -16,6 +16,18 @@
         <servlet-name>VerifyServlet</servlet-name>
         <servlet-class>controller.VerifyServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DisplayPatientsServlet</servlet-name>
+        <servlet-class>controller.DisplayPatientsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisplayDoctorsServlet</servlet-name>
+        <servlet-class>controller.DisplayDoctorsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisplayPharmacyServlet</servlet-name>
+        <servlet-class>controller.DisplayPharmacyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet.do</url-pattern>
@@ -31,6 +43,18 @@
     <servlet-mapping>
         <servlet-name>VerifyServlet</servlet-name>
         <url-pattern>/VerifyServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayPatientsServlet</servlet-name>
+        <url-pattern>/DisplayPatientsServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayDoctorsServlet</servlet-name>
+        <url-pattern>/DisplayDoctorsServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayPharmacyServlet</servlet-name>
+        <url-pattern>/DisplayPharmacyServlet.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

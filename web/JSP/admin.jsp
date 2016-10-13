@@ -19,36 +19,59 @@
         <script src="bower_components/semantic/dist/components/transition.min.js"></script>
 
         <style>
-            .sidebar.menu {
-                width: 15% !important;
+            .sidebar {
+                width: 150px;
             }
-            .sidebar.menu .item {
+            .pusher {
+                margin-left: 150px;
+            }
+            .sidebar .menu{
+                width: inherit !important;
+                height: inherit !important;
+            }
+            .sidebar .menu .item {
                 margin-top: 48px;
                 margin-bottom: 48px;
             }
+            .internal.frame {
+                margin-top: 60px;
+            }
         </style>
+        <script>
+            $(document)
+                .ready(function(){
+                   
+                    $('.tabular.menu .item').tab();
+  
+            })
+            ;
+        </script>
     </head>
     <body>
-        <div class="ui visible sidebar inverted vertical labeled icon borderless menu">
-            <a class="item">
-                <i class="users icon"></i>
-                Patients
-            </a>
-            <a class="item">
-                <i class="doctor icon"></i>
-                Doctors
-            </a>
-            <a class="item">
-                <i class="first aid icon"></i>
-                Pharmacy
-            </a>
-            <a class="item" href="LogOutServlet.do">
-                <i class="sign out icon"></i>
-                Sign Out
-            </a>
+        <div class="ui visible sidebar">
+            <div class="ui inverted vertical labeled icon borderless fluid menu">
+                <a class="item" id="patients-tab" href="DisplayPatientsServlet.do" target="iframe">
+                    <i class="users icon"></i>
+                    Patients
+                </a>
+                <a class="item" id="doctors-tab" href="DisplayDoctorsServlet.do" target="iframe">
+                    <i class="doctor icon"></i>
+                    Doctors
+                </a>
+                <a class="item" id="pharmacy-tab" href="DisplayPharmacyServlet.do" target="iframe">
+                    <i class="first aid icon"></i>
+                    Pharmacy
+                </a>
+                <a class="item" href="LogOutServlet.do">
+                    <i class="sign out icon"></i>
+                    Sign Out
+                </a>
+            </div>
         </div>
-        <div class="pusher">
-            <%@include file="navbar.jsp" %>
+        <jsp:include page="navbar.jsp"></jsp:include>
+        <div class="pusher"> 
+            <iframe class="internal frame" name="iframe" src="DisplayPatientsServlet.do" height="720px" width="100%"
+                    scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0">
         </div>
     </body>
 </html>

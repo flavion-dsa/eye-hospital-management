@@ -7,16 +7,18 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.crce.wtlabs.impl.DoctorDaoImpl;
 
 /**
  *
  * @author Flav
  */
-public class LogOutServlet extends HttpServlet {
+public class DisplayDoctorsServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,8 +34,13 @@ public class LogOutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getSession().setAttribute("user", null);
-            response.sendRedirect("JSP/login.jsp");
+            
+            DoctorDaoImpl dDaoImpl = new DoctorDaoImpl();
+            
+            List doctorList = dDaoImpl.showAllDoctors();
+            
+            request.setAttribute("doctorList", doctorList);
+            request.getRequestDispatcher("JSP/doctorTable.jsp").forward(request, response);
         }
     }
 

@@ -50,7 +50,7 @@ public class VerifyServlet extends HttpServlet {
                 getServletContext().setAttribute("user", null);
                 getServletContext().setAttribute("patient", null);
                 
-                response.sendRedirect("index.html");
+                response.sendRedirect("JSP/login.jsp");
                 
             } else {
                 response.sendRedirect("JSP/verify.jsp");
