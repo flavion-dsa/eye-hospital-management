@@ -7,17 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Properties;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Message;
-import javax.mail.Transport;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.crce.wtlabs.dto.Patient;
 import org.crce.wtlabs.dto.User;
 import org.crce.wtlabs.impl.UserDaoImpl;
+import org.crce.wtlabs.util.Messenger;
 
 /**
  *
@@ -66,45 +57,14 @@ public class RegisterServlet extends HttpServlet {
             p.setEmail(request.getParameter("email"));
             
             // Recipient's email ID needs to be mentioned.
-            String email = request.getParameter("email");
+            String to = request.getParameter("email");
             // Sender's email ID needs to be mentioned
-            String from = "org.crce.wtlabs.7371@gmail.com";
+            String sub = "Hey we just mailed you !";
+            String text = "and this is crazy\nSo here's your account\nMail us maybe\n\nYour verification code is : " + vcode;
+            Messenger.sendMessage(to,sub,text);
             
-            Properties properties = new Properties();
-            properties.put("mail.smtp.auth", "true");
-            properties.put("mail.smtp.starttls.enable", "true");
-            properties.put("mail.smtp.host", "smtp.gmail.com");
-            properties.put("mail.smtp.port", "587");
-
-            Session session = Session.getInstance(properties,
-                    new javax.mail.Authenticator() {
-                        @Override
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication(from, "WTproject@7371");
-                        }
-                    });
-            
-            try {
-                // Create a default MimeMessage object.
-                MimeMessage message = new MimeMessage(session);
-                // Set From: header field of the header.
-                message.setFrom(new InternetAddress(from));
-                // Set To: header field of the header.
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
-                // Set Subject: header field
-                message.setSubject("Hey we just mailed you !");
-                // Now set the actual message
-                message.setText("and this is crazy\nSo here's your account\nMail us maybe\n\nYour verification code is : " + vcode);
-                // Send message
-                Transport.send(message);
-                System.out.println("Message sent successfully...");
-                
-            } catch (MessagingException ex) {
-                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            request.getServletContext().setAttribute("vcode", vcode);
-            request.getServletContext().setAttribute("user", u);
-            request.getServletContext().setAttribute("patient", p);
+            request.getSession().setAttribute("user", u);
+            request.getSession().setAttribute("patient", p);
             RequestDispatcher view = request.getRequestDispatcher("JSP/verify.jsp");
             view.forward(request, response);
         }

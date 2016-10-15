@@ -40,7 +40,7 @@
             </a>
             <a class="item">
                 <i class="first aid icon"></i>
-                Pharmacy
+                Prescriptions
             </a>
             <a class="item" href="LogOutServlet.do">
                 <i class="sign out icon"></i>

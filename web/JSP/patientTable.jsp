@@ -40,15 +40,69 @@
                         <td><c:out value="${patient.lastName}"></c:out></td>
                         <td><c:out value="${patient.contact}"></c:out></td>
                         <td><c:out value="${patient.email}"></c:out></td>
-                            <td><div class="ui red button">Remove</div></td>
-                            <td><div class="ui yellow button">Update</div></td>
-                            <td><div class="ui blue button">Info</div></td>
-                        </tr>
+                        <td><div class="ui red button">Remove</div></td>
+                        <td><div class="ui yellow button">Update</div></td>
+                        <td><div class="ui blue button">Info</div></td>
+                    </tr>
                 </c:forEach>
             </tbody>
         </table>
         <div class="ui right aligned segment">
             <div class="ui green button">Add Patient</div>
+        </div>
+        <div class="ui small modal" id="update-patient">
+            <i class="close icon"></i>
+            <div class="header">
+                Add Patient
+            </div>
+            <div class="content">
+                <form class="ui form" action="../AddPatientServlet.do" method="post">
+                    <div class="ui stacked segment">
+                        <div class="two fields">
+                            <div class="field">
+                                <div class="ui left icon input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="first-name" placeholder="First Name">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui left icon disabled input">
+                                    <i class="user icon"></i>
+                                    <input type="text" name="last-name" placeholder="Last Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="phone icon"></i>
+                                <input type="text" name="phone" placeholder="Contact Number">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="at icon"></i>
+                                <input type="text" name="email" placeholder="E-mail address">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="confirm-password" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="actions">
+                <div class="ui green approve button">Add</div>
+                <div class="ui red deny button">Cancel</div>
+            </div>
         </div>
     </body>
 </html>

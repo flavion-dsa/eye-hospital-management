@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.crce.wtlabs.dto.Patient;
 import org.crce.wtlabs.dto.User;
 import org.crce.wtlabs.impl.PatientDaoImpl;
+import org.crce.wtlabs.impl.UserDaoImpl;
 
 /**
  *
@@ -36,24 +37,28 @@ public class VerifyServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            int vcode = (int) getServletContext().getAttribute("vcode");
-            User u = (User) getServletContext().getAttribute("user");
-            Patient p = (Patient) getServletContext().getAttribute("patient");
+            User u = (User) request.getSession().getAttribute("user");
+            Patient p = (Patient) request.getSession().getAttribute("patient");
+            
+            UserDaoImpl uDaoImpl = new UserDaoImpl();
+            User oldUser = uDaoImpl.getUser(u.getName());
+           
+            int vcode = oldUser.getVcode();
             int passcode = Integer.parseInt(request.getParameter("passcode"));
             
-            if(vcode == passcode) {
-                PatientDaoImpl pDaoImpl = new PatientDaoImpl();
-                pDaoImpl.updateUser(u);
-                pDaoImpl.addPatient(p);
+            PatientDaoImpl pDaoImpl = new PatientDaoImpl();    
+            pDaoImpl.addPatient(p);
                 
-                getServletContext().setAttribute("vcode", null);
-                getServletContext().setAttribute("user", null);
-                getServletContext().setAttribute("patient", null);
+            if(vcode == passcode) {
+               
+                pDaoImpl.updateUser(u);
+                request.getSession().setAttribute("user", null);
+                request.getSession().setAttribute("patient", null);
                 
                 response.sendRedirect("JSP/login.jsp");
                 
             } else {
-                response.sendRedirect("JSP/verify.jsp");
+                request.getRequestDispatcher("JSP/verify.jsp").include(request, response);
             }
         }
     }

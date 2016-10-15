@@ -16,4 +16,5 @@ public interface DoctorDao {
     public void addDoctor(Doctor d);
     public int removeDoctor(Doctor d);
     public List showAllDoctors();
+    public List getAppointmemts(Doctor d);
 }

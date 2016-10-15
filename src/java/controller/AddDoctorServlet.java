@@ -1,25 +1,26 @@
+package controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.crce.wtlabs.dto.Doctor;
 import org.crce.wtlabs.dto.User;
-import org.crce.wtlabs.impl.UserDaoImpl;
+import org.crce.wtlabs.impl.DoctorDaoImpl;
 
 /**
  *
  * @author Flav
  */
-public class LoginServlet extends HttpServlet {
+public class AddDoctorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,43 +35,27 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("..Login Servlet");
+            /* TODO output your page here. You may use following sample code. */
             
-            User user = new User();
-            user.setName(request.getParameter("email"));
-            user.setPassword(request.getParameter("password"));
+            User u = new User();
+            u.setName(request.getParameter("email"));
+            u.setPassword(request.getParameter("password"));
+            u.setType(2);
+            u.setVcode(999);
             
-            UserDaoImpl userDaoImpl = new UserDaoImpl();
+            Doctor d = new Doctor();
+            d.setFirstName(request.getParameter("first-name"));
+            d.setLastName(request.getParameter("last-name"));
+            d.setContact(request.getParameter("contact"));
+            d.setEmail(request.getParameter("email"));
+            d.setQualification(request.getParameter("qualification"));
+            d.setSalary(Integer.parseInt(request.getParameter("salary")));
             
-            if(userDaoImpl.isValid(user)) {
-                User oldUser = userDaoImpl.getUser(user.getName());
-                request.getSession().setAttribute("user", user);
-                
-                if(userDaoImpl.isVerified(user)) {   
-                    RequestDispatcher view = null;
-                    user.setType(oldUser.getType());
-                    user.setVcode(oldUser.getVcode());
-                    
-                    switch (user.getType()) {
-                        case 0:
-                            view = request.getRequestDispatcher("JSP/admin.jsp");
-                            break;
-                        case 1:
-                            view = request.getRequestDispatcher("JSP/patient.jsp");
-                            break;
-                        case 2:
-                            view = request.getRequestDispatcher("JSP/doctor.jsp");
-                    }
-                    view.forward(request, response);
-                } else {
-                    request.getRequestDispatcher("JSP/reverify.jsp").forward(request, response);
-                }
-                
-            }
-            else {
-                response.sendRedirect("JSP/login.jsp");
-            }
+            DoctorDaoImpl dDaoImpl = new DoctorDaoImpl();
+            dDaoImpl.addUser(u);
+            dDaoImpl.addDoctor(d);
             
+            request.getRequestDispatcher("JSP/doctorTable.jsp").forward(request, response);
         }
     }
 

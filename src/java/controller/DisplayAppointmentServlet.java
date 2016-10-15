@@ -7,19 +7,20 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.crce.wtlabs.dto.Doctor;
 import org.crce.wtlabs.dto.User;
-import org.crce.wtlabs.impl.UserDaoImpl;
+import org.crce.wtlabs.impl.DoctorDaoImpl;
 
 /**
  *
  * @author Flav
  */
-public class LoginServlet extends HttpServlet {
+public class DisplayAppointmentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,43 +35,17 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("..Login Servlet");
+            /* TODO output your page here. You may use following sample code. */
             
-            User user = new User();
-            user.setName(request.getParameter("email"));
-            user.setPassword(request.getParameter("password"));
+            Doctor doctor = new Doctor();
+            User user = (User) request.getSession().getAttribute("user");
+            doctor.setEmail(user.getName());
+           
+            DoctorDaoImpl dDaoImpl = new DoctorDaoImpl();
+            List appointmentList = dDaoImpl.getAppointmemts(doctor);
             
-            UserDaoImpl userDaoImpl = new UserDaoImpl();
-            
-            if(userDaoImpl.isValid(user)) {
-                User oldUser = userDaoImpl.getUser(user.getName());
-                request.getSession().setAttribute("user", user);
-                
-                if(userDaoImpl.isVerified(user)) {   
-                    RequestDispatcher view = null;
-                    user.setType(oldUser.getType());
-                    user.setVcode(oldUser.getVcode());
-                    
-                    switch (user.getType()) {
-                        case 0:
-                            view = request.getRequestDispatcher("JSP/admin.jsp");
-                            break;
-                        case 1:
-                            view = request.getRequestDispatcher("JSP/patient.jsp");
-                            break;
-                        case 2:
-                            view = request.getRequestDispatcher("JSP/doctor.jsp");
-                    }
-                    view.forward(request, response);
-                } else {
-                    request.getRequestDispatcher("JSP/reverify.jsp").forward(request, response);
-                }
-                
-            }
-            else {
-                response.sendRedirect("JSP/login.jsp");
-            }
-            
+            request.setAttribute("appointmentList", appointmentList);
+            request.getRequestDispatcher("JSP/appointmentTable.jsp").forward(request, response);
         }
     }
 

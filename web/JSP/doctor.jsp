@@ -18,36 +18,50 @@
         <script src="bower_components/semantic/dist/components/transition.min.js"></script>
 
         <style>
-            .sidebar.menu {
-                width: 15% !important;
+            .sidebar {
+                width: 150px;
             }
-            .sidebar.menu .item {
+            .pusher {
+                margin-left: 150px;
+            }
+            .sidebar .menu{
+                width: inherit !important;
+                height: inherit !important;
+            }
+            .sidebar .menu .item {
                 margin-top: 48px;
                 margin-bottom: 48px;
+            }
+            .internal.frame {
+                margin-top: 60px;
             }
         </style>
     </head>
     <body>
-        <div class="ui visible sidebar inverted vertical labeled icon borderless menu">
-            <a class="item">
-                <i class="user icon"></i>
-                Patient
-            </a>
-            <a class="item">
-                <i class="treatment icon"></i>
-                Diagnosis
-            </a>
-            <a class="item">
-                <i class="first aid icon"></i>
-                Pharmacy
-            </a>
-            <a class="item" href="LogOutServlet.do">
-                <i class="sign out icon"></i>
-                Sign Out
-            </a>
+        <div class="ui visible sidebar">
+            <div class="ui inverted vertical labeled icon borderless fluid menu">
+                <a class="item" id="dashboard-tab">
+                    <i class="user icon"></i>
+                    Dashboard
+                </a>
+                <a class="item" id="diagnosis-tab">
+                    <i class="doctor icon"></i>
+                    Doctors
+                </a>
+                <a class="item" id="appointments-tab" href="DisplayAppointmentServlet.do" target="iframe">
+                    <i class="clock icon"></i>
+                    Appointments
+                </a>
+                <a class="item" href="LogOutServlet.do">
+                    <i class="sign out icon"></i>
+                    Sign Out
+                </a>
+            </div>
         </div>
+        <%@include file="navbar.jsp" %>
         <div class="pusher">
-            <%@include file="navbar.jsp" %>
+            <iframe class="internal frame" name="iframe" src="DisplayAppointmentServlet.do" height="720px" width="100%"
+                    scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0">
         </div>
     </body>
 </html>

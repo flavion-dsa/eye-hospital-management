@@ -77,7 +77,7 @@
                 Add a Doctor
             </div>
             <div class="content">
-                <form class="ui form" action="../AddDoctorServlet.do" method="post">
+                <form class="ui form" action="AddDoctorServlet.do" method="post">
                     <div class="ui stacked segment">
                         <div class="two fields">
                             <div class="field">
@@ -108,21 +108,24 @@
                         <div class="field">
                             <div class="ui left icon input">
                                 <i class="lock icon"></i>
-                                <input type="password" name="password" placeholder="Password">
+                                <input type="text" name="password" placeholder="Default Password">
                             </div>
                         </div>
                         <div class="field">
                             <div class="ui left icon input">
-                                <i class="lock icon"></i>
-                                <input type="password" name="confirm-password" placeholder="Confirm Password">
+                                <i class="student icon"></i>
+                                <input type="text" name="qualification" placeholder="Qualification">
                             </div>
                         </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="money icon"></i>
+                                <input type="text" name="salary" placeholder="Salary">
+                            </div>
+                        </div>
+                        <input type="submit" class="ui fluid green submit button" value="Add">
                     </div>
                 </form>
-            </div>
-            <div class="actions">
-                <div class="ui green approve button">Add</div>
-                <div class="ui red deny button">Cancel</div>
             </div>
         </div>
         

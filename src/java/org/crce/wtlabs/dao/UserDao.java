@@ -5,7 +5,6 @@
  */
 package org.crce.wtlabs.dao;
 
-import java.sql.ResultSet;
 import org.crce.wtlabs.dto.User;
 
 /**
@@ -15,7 +14,8 @@ import org.crce.wtlabs.dto.User;
 public interface UserDao {
     
     public boolean isValid(User user);
-    public int getUserType(User user);
+    public boolean isVerified(User user);
+    public User getUser(String name);
     public void addUser(User user);
     public void updateUser(User user);
     public void updatePassword(User user);

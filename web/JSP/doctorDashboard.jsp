@@ -48,33 +48,6 @@
         </script>
     </head>
     <body>
-        <div class="ui three item inverted blue labeled icon borderless tabular menu" id="doctors">
-            <a class="item" data-tab="add-doctor">
-                <i class="huge icons">
-                    <i class="doctor icon"></i>
-                    <i class="corner green add icon"></i>
-                </i>
-                Add doctor
-            </a>
-            <a class="item" data-tab="remove-doctor">
-                <i class="huge icons">
-                    <i class="doctor icon"></i>
-                    <i class="corner red remove icon"></i>
-                </i>
-                Remove doctor
-            </a>
-            <a class="item" data-tab="update-doctor">
-                <i class="huge icons">
-                    <i class="doctor icon"></i>
-                    <i class="corner yellow repeat icon"></i>
-                </i>
-                Update doctor
-            </a>
-        </div>
-        <div class="ui tab" data-tab="add-doctor">
-
-        </div>
-        <div class="ui tab" data-tab="remove-doctor">Remove</div>
-        <div class="ui tab" data-tab="update-doctor">Update Patient</div>
+        
     </body>
 </html>

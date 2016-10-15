@@ -28,6 +28,7 @@
                     <th>Type</th>
                     <th>Price</th>
                     <th>Quantity</th>
+                    <th>Expiry Date</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -41,6 +42,7 @@
                     <td><c:out value="${medicine.type}"></c:out></td>
                     <td><c:out value="${medicine.price}"></c:out></td>
                     <td><c:out value="${medicine.quantity}"></c:out></td>
+                    <td><c:out value="${medicine.expiry}"></c:out></td>
                     <td><div class="ui red button">Remove</div></td>
                     <td><div class="ui yellow button">Update</div></td>
                     <td><div class="ui blue button">Info</div></td>

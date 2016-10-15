@@ -7,7 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +19,7 @@ import org.crce.wtlabs.impl.UserDaoImpl;
  *
  * @author Flav
  */
-public class LoginServlet extends HttpServlet {
+public class ResetPasswordServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,41 +34,27 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            System.out.println("..Login Servlet");
+            /* TODO output your page here. You may use following sample code. */
             
-            User user = new User();
-            user.setName(request.getParameter("email"));
-            user.setPassword(request.getParameter("password"));
+            String email = request.getParameter("email");
+            int vcode = Integer.parseInt(request.getParameter("vcode"));
+            
+            Random random = new Random();
+            int newVcode = 1000+random.nextInt(999);
             
             UserDaoImpl userDaoImpl = new UserDaoImpl();
+            User oldUser = userDaoImpl.getUser(email);
             
-            if(userDaoImpl.isValid(user)) {
-                User oldUser = userDaoImpl.getUser(user.getName());
-                request.getSession().setAttribute("user", user);
+            User user = new User();
+            user.setName(email);
+            user.setVcode(newVcode);
+            
+            if(oldUser.getVcode() == vcode) {
                 
-                if(userDaoImpl.isVerified(user)) {   
-                    RequestDispatcher view = null;
-                    user.setType(oldUser.getType());
-                    user.setVcode(oldUser.getVcode());
-                    
-                    switch (user.getType()) {
-                        case 0:
-                            view = request.getRequestDispatcher("JSP/admin.jsp");
-                            break;
-                        case 1:
-                            view = request.getRequestDispatcher("JSP/patient.jsp");
-                            break;
-                        case 2:
-                            view = request.getRequestDispatcher("JSP/doctor.jsp");
-                    }
-                    view.forward(request, response);
-                } else {
-                    request.getRequestDispatcher("JSP/reverify.jsp").forward(request, response);
-                }
+                userDaoImpl.updatePassword(user);
                 
-            }
-            else {
-                response.sendRedirect("JSP/login.jsp");
+            } else {
+                response.sendRedirect("JSP/register.jsp");
             }
             
         }

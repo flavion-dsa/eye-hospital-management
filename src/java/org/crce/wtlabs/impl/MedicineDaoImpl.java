@@ -62,6 +62,7 @@ public class MedicineDaoImpl implements MedicineDao {
                 m.setType(result.getString("M_TYPE"));
                 m.setPrice(result.getFloat("PRICE"));
                 m.setQuantity(result.getInt("QUANTITY"));
+                m.setExpiry(result.getDate("EXPIRY"));
                 
                 list.add(m);
             }

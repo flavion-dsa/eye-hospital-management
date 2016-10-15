@@ -45,7 +45,7 @@ public class UserDaoImpl implements UserDao {
             if(result.next()) {
                 System.out.println(result.getString("PASSWORD"));
                 
-                if(result.getString("PASSWORD").equals(user.getPassword()) && result.getInt("VERIFIED") == 1) {
+                if(result.getString("PASSWORD").equals(user.getPassword())) {
                     return true;
                 }
             }
@@ -60,8 +60,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int getUserType(User user) {
-        int type = 0;
+    public User getUser(String name) {
+        User user = null;
         
         try {
             conn = DataSource.getConnection();
@@ -73,12 +73,14 @@ public class UserDaoImpl implements UserDao {
         
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(1, name);
             
             result = preparedStatement.executeQuery();
             
             if(result.next()) {
-                type = result.getInt("USER_TYPE");
+                user = new User();
+                user.setType(result.getInt("USER_TYPE"));
+                user.setVcode(result.getInt("VCODE"));
             }
             
             conn.close();
@@ -87,7 +89,7 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return type;
+        return user;
     }
 
     @Override
@@ -121,6 +123,12 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void updatePassword(User user) {
         
+        try {
+            conn = DataSource.getConnection();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
@@ -145,5 +153,34 @@ public class UserDaoImpl implements UserDao {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+
+    @Override
+    public boolean isVerified(User user) {
+        
+        try {
+            conn = DataSource.getConnection();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String query = "SELECT * FROM HR.USERS WHERE USERNAME = ?";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            
+            preparedStatement.setString(1, user.getName());
+            result = preparedStatement.executeQuery();
+            
+            if(result.next()) {
+                if(result.getInt("VERIFIED") == 1) {
+                    return true;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return false;
     }
 }
