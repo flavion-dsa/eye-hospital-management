@@ -66,11 +66,23 @@ public class MedicineDaoImpl implements MedicineDao {
                 
                 list.add(m);
             }
-            
-            conn.close();
-            
+           
         } catch (SQLException ex) {
             Logger.getLogger(MedicineDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return list;

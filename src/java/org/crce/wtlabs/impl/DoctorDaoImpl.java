@@ -50,10 +50,20 @@ public class DoctorDaoImpl extends UserDaoImpl implements DoctorDao {
             preparedStatement.setFloat(6, d.getSalary());
             
             preparedStatement.executeUpdate();
-            
-            conn.close();
+           
         } catch (SQLException ex) {
             Logger.getLogger(DoctorDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
@@ -90,11 +100,23 @@ public class DoctorDaoImpl extends UserDaoImpl implements DoctorDao {
                 
                 list.add(d);
             }
-            
-            conn.close();
-            
+          
         } catch (SQLException ex) {
             Logger.getLogger(DoctorDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return list;
@@ -134,11 +156,23 @@ public class DoctorDaoImpl extends UserDaoImpl implements DoctorDao {
                 
                 list.add(app);
             }
-            
-            conn.close();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DoctorDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return list;

@@ -49,11 +49,23 @@ public class UserDaoImpl implements UserDao {
                     return true;
                 }
             }
-            
-            conn.close();
-            
+        
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return false;
@@ -87,6 +99,20 @@ public class UserDaoImpl implements UserDao {
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return user;
@@ -117,6 +143,17 @@ public class UserDaoImpl implements UserDao {
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -127,6 +164,34 @@ public class UserDaoImpl implements UserDao {
             conn = DataSource.getConnection();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String query = "UPDATE HR.USERS SET PASSWORD = ?, VCODE = ? WHERE USERNAME = ?";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setInt(2, user.getVcode());
+            preparedStatement.setString(3, user.getName());
+            
+            preparedStatement.executeUpdate();
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
@@ -147,10 +212,20 @@ public class UserDaoImpl implements UserDao {
             
             preparedStatement.setString(1, user.getName());
             preparedStatement.executeUpdate();
-            conn.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally { 
+            try {
+                if(preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if(conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }     
         }
         
     }
@@ -179,6 +254,20 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return false;

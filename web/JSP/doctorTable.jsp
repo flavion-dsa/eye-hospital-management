@@ -25,7 +25,7 @@
                     
                     $('#add-doctor')
                         .on('click', function() {
-                            $('.ui.modal')
+                            $('#add-doctor-modal')
                                 .modal({
                                     closable	: false,
                                     onApprove	: function() {
@@ -71,7 +71,7 @@
         <div class="ui right aligned segment">
             <div class="ui green button" id="add-doctor">Add Doctor</div>
         </div>
-        <div class="ui small modal">
+        <div class="ui small modal" id="add-doctor-modal">
             <i class="close icon"></i>
             <div class="header">
                 Add a Doctor

@@ -48,10 +48,11 @@ public class ResetPasswordServlet extends HttpServlet {
             User user = new User();
             user.setName(email);
             user.setVcode(newVcode);
+            user.setPassword(request.getParameter("password"));
             
             if(oldUser.getVcode() == vcode) {
-                
                 userDaoImpl.updatePassword(user);
+                response.sendRedirect("JSP/login.jsp");
                 
             } else {
                 response.sendRedirect("JSP/register.jsp");

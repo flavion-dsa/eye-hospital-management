@@ -32,7 +32,7 @@ public class LogOutServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.getSession().setAttribute("user", null);
+            request.getSession(false).setAttribute("user", null);
             response.sendRedirect("JSP/login.jsp");
         }
     }

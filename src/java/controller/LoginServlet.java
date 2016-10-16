@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,24 +45,25 @@ public class LoginServlet extends HttpServlet {
             
             if(userDaoImpl.isValid(user)) {
                 User oldUser = userDaoImpl.getUser(user.getName());
-                request.getSession().setAttribute("user", user);
                 
                 if(userDaoImpl.isVerified(user)) {   
-                    RequestDispatcher view = null;
+                    request.getSession().setAttribute("user", user);
+
                     user.setType(oldUser.getType());
                     user.setVcode(oldUser.getVcode());
-                    
+                   
                     switch (user.getType()) {
                         case 0:
-                            view = request.getRequestDispatcher("JSP/admin.jsp");
+                            response.sendRedirect("JSP/admin.jsp");
                             break;
                         case 1:
-                            view = request.getRequestDispatcher("JSP/patient.jsp");
+                            response.sendRedirect("JSP/patient.jsp");
                             break;
                         case 2:
-                            view = request.getRequestDispatcher("JSP/doctor.jsp");
+                            response.sendRedirect("JSP/doctor.jsp");
                     }
-                    view.forward(request, response);
+                    
+                    
                 } else {
                     request.getRequestDispatcher("JSP/reverify.jsp").forward(request, response);
                 }

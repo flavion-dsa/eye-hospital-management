@@ -78,14 +78,12 @@
         </script>
     </head>
     <body>
-        <input type="hidden" value="${param.email}" name="email">
-        <input type="hidden" value="${param.vcode}" name="vcode">
         <div class="pusher">
             <div class="ui middle aligned center aligned grid" style="margin-top: 120px">
                 <div class="column">
                     <h2 class="ui inverted header">
                         <div class="content">
-                            Verify your Account
+                            Enter new password
                         </div>
                     </h2>
                     <div class="ui message">
@@ -95,6 +93,8 @@
                         </h4>
                     </div>
                     <form class="ui form" action="../ResetPasswordServlet.do" method="post">
+                        <input type="hidden" value="${param.email}" name="email">
+                        <input type="hidden" value="${param.vcode}" name="vcode">
                         <div class="ui stacked segment">
                             <div class="field">
                                 <div class="ui left icon input">

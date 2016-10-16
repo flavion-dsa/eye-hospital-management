@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,7 +24,6 @@ import org.crce.wtlabs.util.DataSource;
 public class PatientDaoImpl extends UserDaoImpl implements PatientDao {
 
     private Connection conn;
-    private Statement statement;
     private PreparedStatement preparedStatement;
     private ResultSet result;
     
@@ -49,10 +47,20 @@ public class PatientDaoImpl extends UserDaoImpl implements PatientDao {
             preparedStatement.setString(4, p.getContact());
             
             preparedStatement.executeUpdate();
-            conn.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(PatientDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }
@@ -90,11 +98,23 @@ public class PatientDaoImpl extends UserDaoImpl implements PatientDao {
                 
                 list.add(p);
             }
-            
-            conn.close();
-            
+           
         } catch (SQLException ex) {
             Logger.getLogger(PatientDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return list;
     }
