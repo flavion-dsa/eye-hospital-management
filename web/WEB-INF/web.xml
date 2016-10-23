@@ -48,6 +48,15 @@
         <servlet-name>ResetPasswordServlet</servlet-name>
         <servlet-class>controller.ResetPasswordServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GoogleLoginServlet</servlet-name>
+        <servlet-class>controller.GoogleLoginServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>OAuth2CallbackServlet</servlet-name>
+        <servlet-class>controller.OAuth2CallbackServlet</servlet-class>
+        <async-supported>true</async-supported>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet.do</url-pattern>
@@ -95,6 +104,14 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordServlet</servlet-name>
         <url-pattern>/ResetPasswordServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GoogleLoginServlet</servlet-name>
+        <url-pattern>/GoogleLoginServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OAuth2CallbackServlet</servlet-name>
+        <url-pattern>/oauth2callback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

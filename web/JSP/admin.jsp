@@ -7,7 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:if test="${sessionScope.user == null}">
+
+<c:if test="${sessionScope.user.type != 0}">
     <c:redirect url="login.jsp"></c:redirect>
 </c:if>
 <!DOCTYPE html>
@@ -16,7 +17,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin</title>
         
-        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Cache-Control" content="private, max-age=0, no-cache">
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="0">
 

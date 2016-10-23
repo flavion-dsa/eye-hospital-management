@@ -12,7 +12,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Cache-Control" content="private, max-age=0, no-cache">
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="0">
 
@@ -110,7 +110,17 @@
                             </div>
                             <a href="forgotPassword.jsp">Forgot password ?</a>
                             <br><br>
-                            <div class="ui fluid large blue submit button">Sign In</div>
+                            <div class="ui fluid large blue submit button">Sign in</div>
+                            <div class="ui horizontal divider">or</div>
+                            <a class="ui fluid large google plus labeled icon button" href="../GoogleLoginServlet.do">
+                                <i class="google plus icon"></i>
+                                Sign in with Google +
+                            </a>
+                            <br>
+                            <div class="ui large fluid facebook labeled icon button">
+                                <i class="facebook f icon"></i>
+                                Sign in with Facebook
+                            </div>
                         </div>
                     </form>
                     <div class="ui message">

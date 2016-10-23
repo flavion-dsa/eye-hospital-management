@@ -35,7 +35,7 @@
               margin-top: -100px;
             }
             .column {
-              max-width: 500px;
+              max-width: 1024px;
             }
 
             .ui.message h4 {
@@ -135,60 +135,80 @@
     </head>
     <body>
         <div class="pusher">
-            <div class="ui middle aligned center aligned grid" style="margin-top: 120px">
+            <div class="ui middle aligned center aligned grid" style="margin-top: 100px">
                 <div class="column">
                     <h2 class="ui inverted image header">
                         <div class="content">
                             Create your account
                         </div>
                     </h2>
-                    <form class="ui form" action="../RegisterServlet.do" method="post">
-                        <div class="ui stacked segment">
-                            <div class="two fields">
-                                <div class="field">
-                                    <div class="ui left icon input">
-                                        <i class="user icon"></i>
-                                        <input type="text" name="first-name" placeholder="First Name">
+                    <div class="ui middle aligned two column grid" style="margin-top: 20px">
+                        <div class="center aligned column">
+                            <form class="ui form" action="../RegisterServlet.do" method="post">
+                                <div class="ui stacked segment">
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <div class="ui left icon input">
+                                                <i class="user icon"></i>
+                                                <input type="text" name="first-name" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="ui left icon input">
+                                                <i class="user icon"></i>
+                                                <input type="text" name="last-name" placeholder="Last Name">
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="field">
-                                    <div class="ui left icon input">
-                                        <i class="user icon"></i>
-                                        <input type="text" name="last-name" placeholder="Last Name">
+                                    <div class="field">
+                                        <div class="ui left icon input">
+                                            <i class="phone icon"></i>
+                                            <input type="text" name="phone" placeholder="Contact Number">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="ui left icon input">
-                                    <i class="phone icon"></i>
-                                    <input type="text" name="phone" placeholder="Contact Number">
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="ui left icon input">
-                                    <i class="at icon"></i>
-                                    <input type="text" name="email" placeholder="E-mail address">
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="ui left icon input">
-                                    <i class="lock icon"></i>
-                                    <input type="password" name="password" placeholder="Password">
-                                </div>
-                            </div>
-                            <div class="field">
-                                <div class="ui left icon input">
-                                    <i class="lock icon"></i>
-                                    <input type="password" name="confirm-password" placeholder="Confirm Password">
-                                </div>
-                            </div>
-                            <div class="g-recaptcha" align="center"
-                                 data-sitekey="6Ldy2QgUAAAAAKlIbdfRRyZ7G8Y-IHITYy9CMrF-"
-                                 style="margin-bottom: 2em;"></div>
+                                    <div class="field">
+                                        <div class="ui left icon input">
+                                            <i class="at icon"></i>
+                                            <input type="text" name="email" placeholder="E-mail address">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="ui left icon input">
+                                            <i class="lock icon"></i>
+                                            <input type="password" name="password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="field">
+                                        <div class="ui left icon input">
+                                            <i class="lock icon"></i>
+                                            <input type="password" name="confirm-password" placeholder="Confirm Password">
+                                        </div>
+                                    </div>
+                                    <div class="g-recaptcha" align="center"
+                                         data-sitekey="6Ldy2QgUAAAAAKlIbdfRRyZ7G8Y-IHITYy9CMrF-"
+                                         style="margin-bottom: 2em;"></div>
 
-                            <div class="ui fluid large blue submit button">Register</div>
+                                    <div class="ui fluid large blue submit button">Register</div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                        <div class="two wide column">
+                            <h2 class="ui inverted header">OR</h2>
+                        </div>
+                        <div class="center aligned six wide column">
+                            <div class="ui segment">
+                                <div class="ui large fluid google plus labeled icon button">
+                                    <i class="google plus icon"></i>
+                                    Sign in with Google +
+                                </div>
+                                <br>
+                                <div class="ui large fluid facebook labeled icon button">
+                                    <i class="facebook f icon"></i>
+                                    Sign in with Facebook
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -7,20 +7,22 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Random;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.crce.wtlabs.dto.User;
-import org.crce.wtlabs.impl.UserDaoImpl;
-import org.crce.wtlabs.util.Encrypter;
+import org.crce.wtlabs.util.Google2Api;
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.oauth.OAuthService;
 
 /**
  *
  * @author Flav
  */
-public class ResetPasswordServlet extends HttpServlet {
+public class GoogleLoginServlet extends HttpServlet {
+    
+    private static final String CLIENT_ID = "928535412886-n4pqhk06a6daqp0hbqalk32dfdff62a2.apps.googleusercontent.com";
+    private static final String CLIENT_SECRET = "feMXIUB6ZwGwhTWZiPQrUqUo";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,31 +39,19 @@ public class ResetPasswordServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            String email = request.getParameter("email");
-            int vcode = Integer.parseInt(request.getParameter("vcode"));
+            ServiceBuilder sBuilder = new ServiceBuilder();
+            OAuthService service = (OAuthService) sBuilder.provider(Google2Api.class)
+                        .apiKey(CLIENT_ID)
+                        .apiSecret(CLIENT_SECRET)
+                        .callback("http://localhost:8080/EyeHospitalManagement/oauth2callback")
+                        .scope("openid profile email "+
+                                "https://www.googleapis.com/auth/plus.login "+
+                                "https://www.googleapis.com/auth/plus.me")
+                        .debug()
+                        .build();
             
-            Random random = new Random();
-            int newVcode = 1000+random.nextInt(999);
-            
-            UserDaoImpl userDaoImpl = new UserDaoImpl();
-            User oldUser = userDaoImpl.getUser(email);
-            
-            String password = request.getParameter("password");
-            Encrypter encrypter = new Encrypter();
-            
-            User user = new User();
-            user.setName(email);
-            user.setVcode(newVcode);
-            user.setPassword(encrypter.encrypt(password));
-            
-            if(oldUser.getVcode() == vcode) {
-                userDaoImpl.updatePassword(user);
-                response.sendRedirect("JSP/login.jsp");
-                
-            } else {
-                response.sendRedirect("JSP/register.jsp");
-            }
-            
+            request.getSession().setAttribute("oauth2Service", service);
+            response.sendRedirect(service.getAuthorizationUrl(null));
         }
     }
 

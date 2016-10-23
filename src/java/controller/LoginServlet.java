@@ -7,14 +7,13 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.crce.wtlabs.dto.User;
 import org.crce.wtlabs.impl.UserDaoImpl;
+import org.crce.wtlabs.util.Encrypter;
 
 /**
  *
@@ -37,9 +36,12 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             System.out.println("..Login Servlet");
             
+            String password = request.getParameter("password");
+            Encrypter encrypter = new Encrypter();
+            
             User user = new User();
             user.setName(request.getParameter("email"));
-            user.setPassword(request.getParameter("password"));
+            user.setPassword(encrypter.encrypt(password));
             
             UserDaoImpl userDaoImpl = new UserDaoImpl();
             
@@ -47,11 +49,12 @@ public class LoginServlet extends HttpServlet {
                 User oldUser = userDaoImpl.getUser(user.getName());
                 
                 if(userDaoImpl.isVerified(user)) {   
-                    request.getSession().setAttribute("user", user);
 
                     user.setType(oldUser.getType());
                     user.setVcode(oldUser.getVcode());
-                   
+                    
+                    request.getSession().setAttribute("user", user);
+                    
                     switch (user.getType()) {
                         case 0:
                             response.sendRedirect("JSP/admin.jsp");
@@ -61,9 +64,11 @@ public class LoginServlet extends HttpServlet {
                             break;
                         case 2:
                             response.sendRedirect("JSP/doctor.jsp");
+                            break;
+                        case 3:
+                            response.sendRedirect("JSP/chemist.jsp");
                     }
-                    
-                    
+
                 } else {
                     request.getRequestDispatcher("JSP/reverify.jsp").forward(request, response);
                 }

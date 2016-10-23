@@ -12,6 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         
+        <meta http-equiv="Cache-Control" content="private, max-age=0, no-cache">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        
         <link rel="stylesheet" type="text/css" href="bower_components/semantic/dist/semantic.min.css">
 
         <script src="bower_components/jquery/dist/jquery.min.js"></script>

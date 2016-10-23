@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.crce.wtlabs.dto.Patient;
 import org.crce.wtlabs.dto.User;
 import org.crce.wtlabs.impl.UserDaoImpl;
+import org.crce.wtlabs.util.Encrypter;
 import org.crce.wtlabs.util.Messenger;
 
 /**
@@ -38,9 +39,12 @@ public class RegisterServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             
+            String password = request.getParameter("password");
+            Encrypter encrypter = new Encrypter();
+            
             User u = new User();
             u.setName(request.getParameter("email"));
-            u.setPassword(request.getParameter("password"));
+            u.setPassword(encrypter.encrypt(password));
             u.setType(1);
             
             Random random = new Random();
@@ -61,7 +65,9 @@ public class RegisterServlet extends HttpServlet {
             // Sender's email ID needs to be mentioned
             String sub = "Hey we just mailed you !";
             String text = "and this is crazy\nSo here's your account\nMail us maybe\n\nYour verification code is : " + vcode;
-            Messenger.sendMessage(to,sub,text);
+            
+            Messenger messenger = new Messenger();
+            messenger.sendMessage(to,sub,text);
             
             request.getSession().setAttribute("user", u);
             request.getSession().setAttribute("patient", p);

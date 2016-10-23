@@ -36,16 +36,17 @@ public class ForgotPasswordServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            String to = request.getParameter("username");
+            String to = request.getParameter("email");
             UserDaoImpl userDaoImpl = new UserDaoImpl();
-            
+                   
             User user = userDaoImpl.getUser(to);
             int vcode = user.getVcode();
             
             String sub = "Everyone forgets things";
             String text = "Click the link for password reset : \n\nhttp://localhost:8080/EyeHospitalManagement/JSP/resetPassword.jsp?email="+to+"&vcode="+vcode;
             
-            Messenger.sendMessage(to, sub, text);
+            Messenger messenger = new Messenger();
+            messenger.sendMessage(to, sub, text);
             
             response.sendRedirect("JSP/login.jsp");
         }

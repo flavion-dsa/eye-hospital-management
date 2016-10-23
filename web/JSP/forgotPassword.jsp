@@ -73,7 +73,7 @@
                             Reset your password
                         </div>
                     </h2>
-                    <form class="ui form" action="VerifyServlet.do" method="post">
+                    <form class="ui form" action="../ForgotPasswordServlet.do" method="post">
                         <div class="ui stacked segment">
                             <div class="field">
                                 <div class="ui left icon input">

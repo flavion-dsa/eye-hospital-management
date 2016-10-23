@@ -1,6 +1,6 @@
 <%-- 
-    Document   : doctor
-    Created on : Oct 12, 2016, 3:08:53 PM
+    Document   : chemist
+    Created on : Oct 21, 2016, 8:55:06 PM
     Author     : Flav
 --%>
 
@@ -8,19 +8,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<c:if test="${sessionScope.user.type =! 2}">
+<c:if test="${sessionScope.user.type != 3}">
     <c:redirect url="login.jsp"></c:redirect>
 </c:if>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Doctor</title>
+        <title>JSP Page</title>
         
         <meta http-equiv="Cache-Control" content="private, max-age=0, no-cache">
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="0">
-        
+
         <link rel="stylesheet" type="text/css" href="../bower_components/semantic/dist/semantic.min.css">
 
         <script src="../bower_components/jquery/dist/jquery.min.js"></script>
@@ -47,21 +47,30 @@
                 margin-top: 60px;
             }
         </style>
+        <script>
+            $(document)
+                .ready(function(){
+                   
+                    $('.tabular.menu .item').tab();
+  
+            })
+            ;
+        </script>
     </head>
     <body>
         <div class="ui visible sidebar">
             <div class="ui inverted vertical labeled icon borderless fluid menu">
-                <a class="item" id="dashboard-tab">
-                    <i class="user icon"></i>
-                    Dashboard
+                <a class="item" id="patients-tab" href="#" target="iframe">
+                    <i class="users icon"></i>
+                    Patients
                 </a>
-                <a class="item" id="diagnosis-tab">
+                <a class="item" id="doctors-tab" href="#" target="iframe">
                     <i class="doctor icon"></i>
                     Doctors
                 </a>
-                <a class="item" id="appointments-tab" href="../DisplayAppointmentServlet.do" target="iframe">
-                    <i class="clock icon"></i>
-                    Appointments
+                <a class="item" id="pharmacy-tab" href="../DisplayPharmacyServlet.do" target="iframe">
+                    <i class="first aid icon"></i>
+                    Pharmacy
                 </a>
                 <a class="item" href="../LogOutServlet.do">
                     <i class="sign out icon"></i>
@@ -70,8 +79,8 @@
             </div>
         </div>
         <jsp:include page="navbar.jsp"></jsp:include>
-        <div class="pusher">
-            <iframe class="internal frame" name="iframe" src="../DisplayAppointmentServlet.do" height="720px" width="100%"
+        <div class="pusher"> 
+            <iframe class="internal frame" name="iframe" src="../DisplayPatientsServlet.do" height="720px" width="100%"
                     scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0">
         </div>
     </body>

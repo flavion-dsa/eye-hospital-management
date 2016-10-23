@@ -22,17 +22,22 @@ import javax.mail.internet.MimeMessage;
  * @author Flav
  */
 public class Messenger {
-    public static void sendMessage(String to, String subject, String text) {
+    
+    private String from = "org.crce.wtlabs.7371@gmail.com";
+    private String password = "WTproject@7371";
+    Properties properties;
+    
+    public Messenger() {
         
-        String from = "org.crce.wtlabs.7371@gmail.com";
-        String password = "WTproject@7371";
-        
-        Properties properties = new Properties();
+        properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "587");
-
+    }
+    
+    public void sendMessage(String to, String subject, String text) {
+        
         Session session = Session.getInstance(properties,
                 new javax.mail.Authenticator() {
                     @Override
@@ -61,4 +66,5 @@ public class Messenger {
         }
         
     }
+    
 }

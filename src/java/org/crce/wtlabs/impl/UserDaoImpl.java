@@ -43,7 +43,6 @@ public class UserDaoImpl implements UserDao {
             result = preparedStatement.executeQuery();
             
             if(result.next()) {
-                System.out.println(result.getString("PASSWORD"));
                 
                 if(result.getString("PASSWORD").equals(user.getPassword())) {
                     return true;

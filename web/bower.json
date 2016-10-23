@@ -1,0 +1,22 @@
+{
+  "name": "EHM",
+  "homepage": "https://github.com/flavion-dsa/eye-hospital-management",
+  "authors": [
+    "Flavion <flaviondsa@yahoo.in>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "semantic": "^2.2.4",
+    "angular": "angularjs#^1.5.8"
+  }
+}

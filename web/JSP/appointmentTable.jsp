@@ -21,12 +21,16 @@
         
         <script>
             $(document)
-                    .ready(function() {
-                        $('#prescribe')
-                        .on('click',function(){
-                            $('#prescribe-modal')
-                                .show();
-                        });
+                    .ready(function {
+                        
+                        $('.ui.yellow.button')
+                            .on('click', function(name) {
+                                $('.ui.modal')
+                                    .show()
+                                ;
+                        })
+                        ;
+                        
             })
             ;
         </script>
@@ -49,7 +53,7 @@
                         <td><c:out value="${appointment.patientName}"></c:out></td>
                         <td><c:out value="${appointment.appointmentDate}"></c:out></td>
                         <td><div class="ui red button">Done</div></td>
-                        <td><div class="ui yellow button" id="prescribe">Prescribe</div></td>
+                        <td><div class="ui yellow button">Prescribe</div></td>
                         <td><div class="ui blue button">Info</div></td>
                         </tr>
                 </c:forEach>
