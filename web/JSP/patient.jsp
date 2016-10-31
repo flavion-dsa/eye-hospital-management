@@ -11,6 +11,7 @@
 <c:if test="${sessionScope.user.type != 1}">
     <c:redirect url="login.jsp"></c:redirect>
 </c:if>
+<%@include file="cacheControl.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>

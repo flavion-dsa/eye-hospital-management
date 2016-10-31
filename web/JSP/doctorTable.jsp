@@ -42,39 +42,49 @@
             })
             ;
         </script>
+        <style>
+            .ui.borderless.menu {
+                padding: 10px;
+            }
+        </style>
     </head>
     <body>
-        <table class="ui center aligned striped table">
-            <thead>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Contact</th>
-                    <th>Email</th>
-                    <th>Qualification</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="doctor" items="${requestScope.doctorList}">
-                    <tr>
-                        <td><c:out value="${doctor.firstName}"></c:out></td>
-                        <td><c:out value="${doctor.lastName}"></c:out></td>
-                        <td><c:out value="${doctor.contact}"></c:out></td>
-                        <td><c:out value="${doctor.email}"></c:out></td>
-                        <td><c:out value="${doctor.qualification}"></c:out></td>
-                        <td><div class="ui red button">Remove</div></td>
-                        <td><div class="ui yellow button">Edit</div></td>
-                        <td><div class="ui blue button">Info</div></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <div class="ui right aligned segment">
-            <div class="ui green button" id="add-doctor">Add Doctor</div>
+        <div class="ui sticky borderless menu">
+            <div class="item">
+                <div class="ui green button" id="add-doctor">Add Doctor</div>
+            </div> 
         </div>
+        <div class="ui segment">
+            <table class="ui center aligned striped table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Contact</th>
+                        <th>Email</th>
+                        <th>Qualification</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach var="doctor" items="${requestScope.doctorList}">
+                        <tr>
+                            <td><c:out value="${doctor.firstName}"></c:out></td>
+                            <td><c:out value="${doctor.lastName}"></c:out></td>
+                            <td><c:out value="${doctor.contact}"></c:out></td>
+                            <td><c:out value="${doctor.email}"></c:out></td>
+                            <td><c:out value="${doctor.qualification}"></c:out></td>
+                                <td>
+                                    <div class="ui red button">Remove</div>
+                                    <div class="ui yellow button">Update</div>
+                                    <div class="ui blue button">Info</div>
+                                </td>
+                            </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        
         <div class="ui small modal" id="add-doctor-modal">
             <i class="close icon"></i>
             <div class="header">

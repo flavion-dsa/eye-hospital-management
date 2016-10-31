@@ -7,18 +7,16 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.crce.wtlabs.impl.MedicineDaoImpl;
 
 /**
  *
  * @author Flav
  */
-public class DisplayPharmacyServlet extends HttpServlet {
+public class PrescribeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,11 +33,8 @@ public class DisplayPharmacyServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            MedicineDaoImpl mDaoImpl = new MedicineDaoImpl(); 
-            List medicineList = mDaoImpl.showAllMedicines();
+            response.sendRedirect("DisplayAppointmentServlet.do");
             
-            request.setAttribute("medicineList", medicineList);
-            request.getRequestDispatcher("JSP/pharmacyTable.jsp").forward(request, response);
         }
     }
 

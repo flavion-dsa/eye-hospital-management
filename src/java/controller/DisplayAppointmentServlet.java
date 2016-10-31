@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.crce.wtlabs.dto.Doctor;
 import org.crce.wtlabs.dto.User;
-import org.crce.wtlabs.impl.DoctorDaoImpl;
+import org.crce.wtlabs.impl.AppointmentDaoImpl;
+import org.crce.wtlabs.impl.MedicineDaoImpl;
 
 /**
  *
@@ -41,10 +42,14 @@ public class DisplayAppointmentServlet extends HttpServlet {
             User user = (User) request.getSession().getAttribute("user");
             doctor.setEmail(user.getName());
            
-            DoctorDaoImpl dDaoImpl = new DoctorDaoImpl();
-            List appointmentList = dDaoImpl.getAppointmemts(doctor);
+            AppointmentDaoImpl appointmentDaoImpl = new AppointmentDaoImpl();
+            List appointmentList = appointmentDaoImpl.getAppointmemts(doctor);
+            
+            MedicineDaoImpl mDaoImpl = new MedicineDaoImpl();
+            List medicineList = mDaoImpl.showAllMedicines();
             
             request.setAttribute("appointmentList", appointmentList);
+            request.setAttribute("medicineList", medicineList);
             request.getRequestDispatcher("JSP/appointmentTable.jsp").forward(request, response);
         }
     }

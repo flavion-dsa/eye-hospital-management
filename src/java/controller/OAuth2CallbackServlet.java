@@ -71,6 +71,12 @@ public class OAuth2CallbackServlet extends HttpServlet {
             UserDaoImpl userDaoImpl = new UserDaoImpl();
             User oldUser = userDaoImpl.getUser(user.getName());
             
+            if(oldUser == null) {
+                request.getSession().invalidate();
+                response.sendRedirect("JSP/register.jsp");
+                return;
+            }
+            
             user.setType(oldUser.getType());
             user.setVcode(oldUser.getVcode());
             

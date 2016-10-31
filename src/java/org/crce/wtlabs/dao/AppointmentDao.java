@@ -12,8 +12,6 @@ import org.crce.wtlabs.dto.Doctor;
  *
  * @author Flav
  */
-public interface DoctorDao {
-    public void addDoctor(Doctor d);
-    public int removeDoctor(Doctor d);
-    public List showAllDoctors();
+public interface AppointmentDao {
+    public List getAppointmemts(Doctor d);
 }

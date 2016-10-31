@@ -57,6 +57,14 @@
         <servlet-class>controller.OAuth2CallbackServlet</servlet-class>
         <async-supported>true</async-supported>
     </servlet>
+    <servlet>
+        <servlet-name>PrescribeServlet</servlet-name>
+        <servlet-class>controller.PrescribeServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DisplayPaymentServlet</servlet-name>
+        <servlet-class>controller.DisplayPaymentServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet.do</url-pattern>
@@ -112,6 +120,14 @@
     <servlet-mapping>
         <servlet-name>OAuth2CallbackServlet</servlet-name>
         <url-pattern>/oauth2callback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrescribeServlet</servlet-name>
+        <url-pattern>/PrescribeServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayPaymentServlet</servlet-name>
+        <url-pattern>/DisplayPaymentServlet.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

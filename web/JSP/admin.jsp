@@ -11,6 +11,7 @@
 <c:if test="${sessionScope.user.type != 0}">
     <c:redirect url="login.jsp"></c:redirect>
 </c:if>
+<%@include file="cacheControl.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,9 +73,13 @@
                     <i class="first aid icon"></i>
                     Pharmacy
                 </a>
-                <a class="item" href="../LogOutServlet.do">
-                    <i class="sign out icon"></i>
-                    Sign Out
+                <a class="item" id="payment-tab" href="../DisplayPaymentServlet.do" target="iframe">
+                    <i class="payment icon"></i>
+                    Billing
+                </a>
+                <a class="item" id="reports-tab" href="../DisplayReportServlet.do" target="iframe">
+                    <i class="line chart icon"></i>
+                    Reports
                 </a>
             </div>
         </div>

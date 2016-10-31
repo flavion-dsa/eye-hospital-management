@@ -138,7 +138,6 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setInt(5, user.getType());
             
             preparedStatement.executeUpdate();
-            conn.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,8 +174,6 @@ public class UserDaoImpl implements UserDao {
             preparedStatement.setString(3, user.getName());
             
             preparedStatement.executeUpdate();
-            
-            conn.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDaoImpl.class.getName()).log(Level.SEVERE, null, ex);

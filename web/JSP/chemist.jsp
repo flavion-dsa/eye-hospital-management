@@ -60,13 +60,13 @@
     <body>
         <div class="ui visible sidebar">
             <div class="ui inverted vertical labeled icon borderless fluid menu">
-                <a class="item" id="patients-tab" href="#" target="iframe">
-                    <i class="users icon"></i>
-                    Patients
+                <a class="item" id="patients-tab" href="" target="iframe">
+                    <i class="adjust icon"></i>
+                    Prescription
                 </a>
-                <a class="item" id="doctors-tab" href="#" target="iframe">
-                    <i class="doctor icon"></i>
-                    Doctors
+                <a class="item" id="doctors-tab" href="" target="iframe">
+                    <i class="unhide icon"></i>
+                    Lenses
                 </a>
                 <a class="item" id="pharmacy-tab" href="../DisplayPharmacyServlet.do" target="iframe">
                     <i class="first aid icon"></i>

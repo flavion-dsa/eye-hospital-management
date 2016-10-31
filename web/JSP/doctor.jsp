@@ -8,9 +8,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<c:if test="${sessionScope.user.type =! 2}">
+<c:if test="${sessionScope.user.type != 2}">
     <c:redirect url="login.jsp"></c:redirect>
 </c:if>
+<%@include file="cacheControl.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,20 +53,16 @@
         <div class="ui visible sidebar">
             <div class="ui inverted vertical labeled icon borderless fluid menu">
                 <a class="item" id="dashboard-tab">
-                    <i class="user icon"></i>
+                    <i class="dashboard icon"></i>
                     Dashboard
                 </a>
                 <a class="item" id="diagnosis-tab">
-                    <i class="doctor icon"></i>
-                    Doctors
+                    <i class="treatment icon"></i>
+                    Treatment
                 </a>
                 <a class="item" id="appointments-tab" href="../DisplayAppointmentServlet.do" target="iframe">
                     <i class="clock icon"></i>
                     Appointments
-                </a>
-                <a class="item" href="../LogOutServlet.do">
-                    <i class="sign out icon"></i>
-                    Sign Out
                 </a>
             </div>
         </div>

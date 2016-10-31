@@ -6,14 +6,13 @@
 package org.crce.wtlabs.dao;
 
 import java.util.List;
-import org.crce.wtlabs.dto.Doctor;
+import org.crce.wtlabs.dto.Payment;
 
 /**
  *
  * @author Flav
  */
-public interface DoctorDao {
-    public void addDoctor(Doctor d);
-    public int removeDoctor(Doctor d);
-    public List showAllDoctors();
+public interface PaymentDao {
+    public void addPayment(Payment payment);
+    public List showAllPayments();
 }

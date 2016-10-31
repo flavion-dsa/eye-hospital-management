@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class DataSource {
     private static Connection conn;
-    private static String host = "jdbc:postgresql://localhost:5432/HR";
+    private static String host = "jdbc:postgresql://localhost:5432/webtech";
     private static String username = "postgres";
     private static String password = "pass";
     private static String driver = "org.postgresql.Driver";

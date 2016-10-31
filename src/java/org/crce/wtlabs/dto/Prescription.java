@@ -5,33 +5,14 @@
  */
 package org.crce.wtlabs.dto;
 
-import java.sql.Date;
-
 /**
  *
  * @author Flav
  */
-public class Appointment {
-    private String patientName;
+public class Prescription {
     private String patientEmail;
     private String doctorEmail;
-    private Date appointmentDate;
-
-    public Date getAppointmentDate() {
-        return appointmentDate;
-    }
-
-    public void setAppointmentDate(Date appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
-
-    public String getPatientName() {
-        return patientName;
-    }
-
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
-    }
+    private Medicine[] medicines;
 
     public String getPatientEmail() {
         return patientEmail;
@@ -48,4 +29,14 @@ public class Appointment {
     public void setDoctorEmail(String doctorEmail) {
         this.doctorEmail = doctorEmail;
     }
+
+    public Medicine[] getMedicines() {
+        return medicines;
+    }
+
+    public void setMedicines(Medicine[] medicines) {
+        this.medicines = medicines;
+    }
+    
+    
 }

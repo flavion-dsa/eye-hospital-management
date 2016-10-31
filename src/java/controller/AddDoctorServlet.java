@@ -55,7 +55,7 @@ public class AddDoctorServlet extends HttpServlet {
             dDaoImpl.addUser(u);
             dDaoImpl.addDoctor(d);
             
-            request.getRequestDispatcher("JSP/doctorTable.jsp").forward(request, response);
+            response.sendRedirect("DisplayDoctorsServlet.do");
         }
     }
 

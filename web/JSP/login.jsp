@@ -5,6 +5,23 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:choose>
+    <c:when test="${sessionScope.user.type == 0}">
+        <c:redirect url="admin.jsp"></c:redirect>
+    </c:when>
+    <c:when test="${sessionScope.user.type == 1}">
+        <c:redirect url="patient.jsp"></c:redirect>
+    </c:when>
+    <c:when test="${sessionScope.user.type == 2}">
+        <c:redirect url="doctor.jsp"></c:redirect>
+    </c:when>
+    <c:when test="${sessionScope.user.type == 3}">
+        <c:redirect url="chemist.jsp"></c:redirect>
+    </c:when>
+</c:choose>
+<%@include file="cacheControl.jsp" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,6 +59,7 @@
                 font-style: italic;
             }
         </style>
+        
         <script>
             $(document)
                     .ready(function () {
@@ -85,8 +103,9 @@
 
     </head>
     <body>
+        
         <div class="pusher">
-            <div class="ui middle aligned center aligned grid" style="margin-top: 120px">
+            <div class="ui middle aligned center aligned grid" style="margin-top: 100px">
                 <div class="column">
                     <h2 class="ui inverted header">
                         <div class="content">
@@ -117,6 +136,11 @@
                                 Sign in with Google +
                             </a>
                             <br>
+
+                            <fb:login-button 
+                                scope="public_profile,email"
+                                onlogin="checkLoginState();">
+                            </fb:login-button>
                             <div class="ui large fluid facebook labeled icon button">
                                 <i class="facebook f icon"></i>
                                 Sign in with Facebook

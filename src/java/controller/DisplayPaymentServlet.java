@@ -12,13 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.crce.wtlabs.impl.MedicineDaoImpl;
+import org.crce.wtlabs.impl.PaymentDaoImpl;
 
 /**
  *
  * @author Flav
  */
-public class DisplayPharmacyServlet extends HttpServlet {
+public class DisplayPaymentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,11 +35,12 @@ public class DisplayPharmacyServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             
-            MedicineDaoImpl mDaoImpl = new MedicineDaoImpl(); 
-            List medicineList = mDaoImpl.showAllMedicines();
+            PaymentDaoImpl paymentDaoImpl = new PaymentDaoImpl();
             
-            request.setAttribute("medicineList", medicineList);
-            request.getRequestDispatcher("JSP/pharmacyTable.jsp").forward(request, response);
+            List paymentList = paymentDaoImpl.showAllPayments();
+            
+            request.setAttribute("paymentList", paymentList);
+            request.getRequestDispatcher("JSP/paymentTable.jsp").forward(request, response);
         }
     }
 
